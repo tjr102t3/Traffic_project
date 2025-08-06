@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時路況與周邊景點</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title-bar">
+                <h1><b>頭城->南港</b> 國道五號路況預測</h1>
+            </div>
+            <div class="warning-bar">
+                <h2>開車不喝酒，喝酒不開車</h2>
+            </div>
+            <div class="legend">
+                <p><span class="red-dot"></span>紅色: 壅塞，時速40km/h以下</p>
+                <p><span class="orange-dot"></span>橘色: 微壅塞，時速40~60km/h</p>
+                <p><span class="green-dot"></span>綠色: 暢通，時速60km/h以上</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="prediction-container">
+                <select name="預計時間" class="prediction-btn">
+                    <option value="5m">5分鐘</option>
+                    <option value="15m">15分鐘</option>
+                    <option value="30m">30分鐘</option>
+                </select>
+
+                <div class="road-status">
+                    <div class="status-point"> 
+                        <span class="station-id">05F0287N</span>
+                        <div id="dot-start" class="dot"></div>
+                    </div>
+                    <div id="road-segment-1" class="status-bar"></div>
+                    <div class="status-point">
+                        <span class="station-id">05F0055N</span>
+                        <div id="dot-middle" class="dot"></div>
+                    </div>
+                    <div id="road-segment-2" class="status-bar"></div>
+                    <div class="status-point">
+                        <span class="station-id">05F0001N</span>
+                        <div id="dot-end" class="dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attractions-container">
+                <div class="attractions-header">
+                    <h2>周圍景點</h2>
+                </div>
+                <div class="attraction-list">
+                    <div class="attraction-item">
+                        <div class="attraction-image-placeholder"></div>
+                        <div class="attraction-details">
+                            <div class="text-placeholder"></div>
+                            <div class="text-placeholder"></div>
+                        </div>
+                    </div>
+                    <div class="attraction-item">
+                        <div class="attraction-image-placeholder"></div>
+                        <div class="attraction-details">
+                            <div class="text-placeholder"></div>
+                            <div class="text-placeholder"></div>
+                        </div>
+                    </div>
+                    <div class="attraction-item">
+                        <div class="attraction-image-placeholder"></div>
+                        <div class="attraction-details">
+                            <div class="text-placeholder"></div>
+                            <div class="text-placeholder"></div>
+                        </div>
+                    </div>
+                    <div class="attraction-item">
+                        <div class="attraction-image-placeholder"></div>
+                        <div class="attraction-details">
+                            <div class="text-placeholder"></div>
+                            <div class="text-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
