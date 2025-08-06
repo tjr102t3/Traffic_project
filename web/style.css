@@ -1,0 +1,198 @@
+/* 基本樣式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1024px;
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+/* 標題與警語區 */
+header {
+    text-align: center;
+}
+
+.title-bar, .warning-bar {
+    border: 2px solid #000;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.title-bar h1, .warning-bar h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.warning-bar h2 {
+    background-color: hidden;
+    color: #000;
+}
+
+.legend {
+    text-align: left;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.legend p {
+    margin: 0;
+    color: #ff0000;
+    font-size: 14px;
+}
+
+.legend .red-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.legend .orange-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: orange;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.legend .green-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.legend p:nth-of-type(2) { color: #ffa500; }
+.legend p:nth-of-type(3) { color: #008000; }
+
+/* 主要內容區 */
+main {
+    margin-top: 20px;
+}
+
+.prediction-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.prediction-btn {
+    border: 2px solid #000;
+    background-color: #fff;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.road-status {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+}
+
+.status-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.station-id {
+    position: absolute;
+    bottom: -25px;
+    font-size: 12px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    background-color: #fff; /* 預設白色 */
+    border-radius: 50%;
+    z-index: 10;
+}
+
+/* 圓點顏色類別 */
+.dot.red { background-color: #ff0000; }
+.dot.orange { background-color: #ffa500; }
+.dot.green { background-color: #008000; }
+
+/* 預設路段樣式 */
+.status-bar {
+    height: 6px;
+    width: calc(50% - 20px);
+    flex-grow: 1;
+    background-color: #000; /* 預設黑色 */
+}
+
+/* 路段顏色類別 */
+.status-bar.red { background-color: #ff0000; }
+.status-bar.orange { background-color: #ffa500; }
+.status-bar.green { background-color: #008000; }
+
+
+/* 周圍景點區 */
+.attractions-container {
+    border: 2px solid #000;
+    padding: 10px;
+}
+
+.attractions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.attractions-header h2 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.attraction-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.attraction-image-placeholder {
+    width: 80px;
+    height: 60px;
+    border: 2px solid #000;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.attraction-details {
+    flex-grow: 1;
+}
+
+.text-placeholder {
+    height: 12px;
+    background-color: #ddd;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+}
+
+.text-placeholder:last-child {
+    margin-bottom: 0;
+}
