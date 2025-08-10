@@ -1,9 +1,9 @@
 from __future__ import annotations
-
 import pendulum
-
 from airflow.models.dag import DAG
-from tasks.crawler import scrape_and_filter_data, save_data
+
+# 從 tasks/crawler.py 匯入你需要的任務函式
+from tasks.crawler import scrape_and_filter_data, load_to_bigquery
 
 with DAG(
     dag_id="weekend_traffic_analysis",
@@ -13,9 +13,8 @@ with DAG(
     tags=["traffic", "crawler", "weekend"],
 ) as dag:
     
-    # 執行爬蟲任務
-    # scrape_and_filter_data 會回傳一個 Tuple (df, filename)
-    processed_data = scrape_and_filter_data()
+    # 執行爬蟲任務，它的回傳值會被傳遞給下一個任務
+    scraped_data = scrape_and_filter_data()
     
-    # 將爬蟲任務的輸出作為下一個任務的輸入
-    save_data(processed_data)
+    # 將爬蟲任務的輸出作為輸入，上傳到 BigQuery
+    load_to_bigquery(scraped_data)
