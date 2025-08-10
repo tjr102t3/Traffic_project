@@ -132,6 +132,23 @@ def scrape_and_filter_data():
         grouped.insert(0, "Time", df['Time'].iloc[0])
         grouped.insert(0, "Date", df['Date'].iloc[0])
         grouped.insert(2, "TimeStamp", timestamp)
+        
+        # === 將這段程式碼貼在這裡！ ===
+        # 將 TimeStamp 欄位明確地轉換為 datetime 物件
+        # 這能確保資料型態與 BigQuery Schema 中的 DATETIME 吻合
+        grouped['TimeStamp'] = pd.to_datetime(grouped['TimeStamp'])
+        
+        # 確保欄位順序正確 (如果您有保留 table_schema)
+        # 這是為了避免欄位順序不符導致寫入失敗
+        grouped = grouped[[
+            'Date', 
+            'Time', 
+            'TimeStamp', 
+            'GantryFrom', 
+            'GantryTo', 
+            'Speed', 
+            'Volume'
+        ]]
 
         return grouped
 
