@@ -1,105 +1,126 @@
-/* 基本樣式 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f0f2f5;
+    padding: 0;
+    background-color: #fff;
     display: flex;
     justify-content: center;
 }
-
-.container {
-    width: 100%;
-    max-width: 1024px;
-    background-color: #fff;
-    border: 2px solid #000;
-    padding: 35px;
-    box-sizing: border-box;
-}
-
-/* 標題與警語區 */
-header {
-    text-align: center;
-}
-
-.title-bar, .warning-bar {
-    border: 2px solid #000;
-    margin: 10px 0;
-    padding: 10px;
-}
-
-.title-bar h1, .warning-bar h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: normal;
-}
-
-.warning-bar h2 {
-    background-color: hidden;
-    color: #000;
-}
-
-.legend {
-    text-align: left;
-    margin: 15px 0;
-    line-height: 1.5;
-}
-
-.legend p {
-    margin: 0;
-    color: #ff0000;
-    font-size: 14px;
-}
-
-.legend .red-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-.legend .orange-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: orange;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-.legend .green-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: green;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-.legend p:nth-of-type(2) { color: #ffa500; }
-.legend p:nth-of-type(3) { color: #008000; }
-
-/* 主要內容區 */
-main {
-    margin-top: 20px;
-}
-
-.prediction-container {
+.container{
+    width: 1024px;
+    /* background-color: blue; */
     display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+}
+.title p{
+    background: #5d66a6;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    padding-top: 15px;
+    font-size: 20px;
+}
+.title p b{
+    font-size: 40px;
+}
+/* --------------------跑馬燈--------------------------- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  letter-spacing: 5px;
+  color: #5d66a6;
+  font-size: 20px;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee-content2 {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee2 10s linear infinite;
+}
+.marquee-content3 {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee2 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee3 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* ----------------------------------------------- */
+.predict_group{
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    position: relative;
-    margin-bottom: 30px;
+    background: #eff0f4;
 }
-
-.prediction-btn {
-    border: 2px solid #000;
-    background-color: #fff;
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 20px;
+.predict_item{
+    /* background-color: aquamarine; */
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
 }
+.predict_item p{
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+.predict_group .prediction-btn{
+    background: #fff;
+    color: #000;
+    height: 50px;
+    width: 110px;
+    /* border: 1px solid #000; */
+    border-radius:10px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.btn-primary{
+    background-color: #5d66a6;
+    border: #5d66a6;
 
+}
+.predict_group .btn{
+    width: 100px;
+    height: 50px;
+}
+/* --------------------------------- */
 .road-status {
+    width: 80%;
+    margin-top: 40px;
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -117,22 +138,24 @@ main {
 .station-id {
     position: absolute;
     bottom: -25px;
-    font-size: 12px;
+    font-size: 20px;
+    width: 40px;
+    line-height: 1px;
 }
 
 .dot {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #000;
+    width: 30px;
+    height: 30px;
+    border: 5px solid #5d66a6;
     background-color: #fff; /* 預設白色 */
     border-radius: 50%;
     z-index: 10;
 }
 
-/* 圓點顏色類別 */
+/* 圓點顏色類別
 .dot.red { background-color: #ff0000; }
 .dot.orange { background-color: #ffa500; }
-.dot.green { background-color: #008000; }
+.dot.green { background-color: #008000; } */
 
 /* 預設路段樣式 */
 .status-bar {
@@ -141,58 +164,193 @@ main {
     flex-grow: 1;
     background-color: #000; /* 預設黑色 */
 }
-
-/* 路段顏色類別 */
-.status-bar.red { background-color: #ff0000; }
-.status-bar.orange { background-color: #ffa500; }
-.status-bar.green { background-color: #008000; }
-
-
-/* 周圍景點區 */
-.attractions-container {
-    border: 2px solid #000;
-    padding: 10px;
+/* 坪林到頭城，路段顏色類別 */
+.PinglineToToucheng.red { background-color: #ff0000; }
+.PinglineToToucheng.orange { background-color: #ffa500; }
+.PinglineToToucheng.green { background-color: #008000; }
+/* 頭城到南港，路段顏色類別 */
+.TouchengToNangang.red { background-color: #ff0000; }
+.TouchengToNangang.orange { background-color: #ffa500; }
+.TouchengToNangang.green { background-color: #008000; }
+/* --------------------------------------------- */
+.legend {
+    width: 80%;
+    text-align: left;
+    margin: 15px 0;
+    margin-top: 60px;
+    line-height: 1.5;
 }
 
-.attractions-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.attractions-header h2 {
+.legend p {
     margin: 0;
-    font-weight: normal;
+    color: #000;
+    font-size: 16px;
 }
 
-.attraction-item {
+.legend .red-line,.orange-line,.green-line {
+    display: inline-block;
+    width: 40px;
+    height: 5px;
+    border-radius: 0%;
+    margin-right: 5px;
+}
+.line-red-color{background-color: red;}
+.line-orange-color{background-color: orange;}
+.line-grenn-color{background-color: green;}
+/* .legend p:nth-of-type(2) { color: #ffa500; }
+.legend p:nth-of-type(3) { color: #008000; } */
+/* -------------------------------------------------------------- */
+.line-slogan {
+    margin-top: 30px;
+    height: 40px;
+    line-height: 40px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 10px 0;
 }
 
-.attraction-image-placeholder {
-    width: 80px;
-    height: 60px;
-    border: 2px solid #000;
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-.attraction-details {
+.line-slogan .line {
+    display: inline-block;
     flex-grow: 1;
+    border-top: 2px solid #5d66a6;
+        /* 中間 40% 完全不透明，左右漸層淡出 */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        rgba(0,0,0,0), 
+        rgba(0,0,0,1)
+    );
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+
+    mask-image: linear-gradient(
+        to right,
+        rgba(0,0,0,0), 
+        rgba(0,0,0,1)
+    );
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+.line-slogan .line:nth-of-type(2){
+        display: inline-block;
+    flex-grow: 1;
+    border-top: 2px solid #5d66a6;
+        /* 中間 40% 完全不透明，左右漸層淡出 */
+    -webkit-mask-image: linear-gradient(
+        to left,
+        rgba(0,0,0,0), 
+        rgba(0,0,0,1)
+    );
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+
+    mask-image: linear-gradient(
+        to left,
+        rgba(0,0,0,0), 
+        rgba(0,0,0,1)
+    );
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+.line-slogan .text {
+    color: #5d66a6;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: inline-block;
+    height: 23px;
+    }
+/* -------------------------------------------------------------- */
+.attractions{
+    /* background: red; */
+    margin-top: 20px;
+
+}
+.attractions .icon_group {
+    display: flex;
+    justify-content: space-around;  /* 左右平均分散 */
+    align-items: center;
+    width: 100%;       /* 讓父容器撐滿寬度 */
+    margin: 0 auto;    /* 置中整個群組 */
+}
+.attractions .icon_group .icon_item {
+  border: 2px solid #5d66a6;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50px 50px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.icon_item[data-list="list1"] { background-image: url(./icon/coffee_gray.svg); }
+.icon_item[data-list="list2"] { background-image: url(./icon/souvenirs_gray.svg); }
+.icon_item[data-list="list3"] { background-image: url(./icon/hotspring_gray.svg); }
+.icon_item[data-list="list4"] { background-image: url(./icon/gas_gray.svg); }
+/* Hover 時顯示彩色圖 */
+.icon_item[data-list="list1"]:hover,
+.icon_item[data-list="list1"].active {
+    background-image: url('./icon/coffee_color.svg');
+}
+.icon_item[data-list="list2"]:hover,
+.icon_item[data-list="list2"].active {
+    background-image: url('./icon/souvenirs_color.svg');
+}
+.icon_item[data-list="list3"]:hover,
+.icon_item[data-list="list3"].active {
+    background-image: url('./icon/hotspring_color.svg');
+}
+.icon_item[data-list="list4"]:hover,
+.icon_item[data-list="list4"].active {
+    background-image: url('./icon/gas_color.svg');
 }
 
-.text-placeholder {
-    height: 12px;
-    background-color: #ddd;
-    border: 1px solid #000;
-    margin-bottom: 5px;
+.attractions .icon_group .icon_item.active {
+  border-color: #5d66a6;
+  box-shadow: 0 0 10px #5d66a6 ;
 }
 
-.text-placeholder:last-child {
-    margin-bottom: 0;
+.attractions_list{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }
+.attractions_list .list-group-item{
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    text-align: center;
+}
+.attractions_list .list-group-item a{
+    margin-left: 50px;
+    font-size: 20px;
+}
+
+/* 警示窗 存取user位置 */
+  #locationModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+  }
+  button {
+    padding: 8px 16px;
+    margin-top: 10px;
+  }
+
+
+
+
+
+
+

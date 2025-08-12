@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2025-08-07 11:00",
+    "predictSpeed": 45
+  },
+  {
+    "timestamp": "2025-08-07 11:05",
+    "predictSpeed": 56
+  },
+  {
+    "timestamp": "2025-08-07 11:10",
+    "predictSpeed": 68
+  },
+  {
+    "timestamp": "2025-08-07 11:15",
+    "predictSpeed": 90
+  }
+]
