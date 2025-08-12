@@ -1,5 +1,5 @@
 // JSON 檔案的 URL
-const jsonUrl = 'dataTest.json';
+const jsonUrl = '   dataTest.json';
 
 // 根據時速判斷對應的顏色類別
 function getColorBySpeed(speed) {
@@ -14,10 +14,8 @@ function getColorBySpeed(speed) {
 // 獲取路段和圓點的DOM元素
 const roadSegment1 = document.getElementById('road-segment-1');
 const roadSegment2 = document.getElementById('road-segment-2');
-const dotStart = document.getElementById('dot-start');
-const dotMiddle = document.getElementById('dot-middle');
-const dotEnd = document.getElementById('dot-end');
-
+const roadSegment3 = document.getElementById('road-segment-3');
+const roadSegment4 = document.getElementById('road-segment-4');
 // 主要函數：讀取 JSON 並更新路況
 async function updateTrafficStatusFromJson() {
     try {
@@ -48,11 +46,10 @@ async function updateTrafficStatusFromJson() {
         
         // 這裡我們假設整條路段都使用這個最新的速度來判斷顏色
         roadSegment1.className = 'status-bar PinglineToToucheng ' + color;
-        roadSegment2.className = 'status-bar TouchengToNangang ' + color;
-        
-        dotStart.className = 'dot ' + color;
-        dotMiddle.className = 'dot ' + color;
-        dotEnd.className = 'dot ' + color;
+        roadSegment2.className = 'status-bar PinglineToToucheng ' + color;
+        roadSegment3.className = 'status-bar TouchengToNangang ' + color;
+        roadSegment4.className = 'status-bar TouchengToNangang ' + color;
+
 
     } catch (error) {
         console.error('讀取或解析 JSON 檔案時發生錯誤:', error);
