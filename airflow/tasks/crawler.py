@@ -11,7 +11,7 @@ from google.cloud import bigquery
 
 # === 參數設定 ===
 BASE_URL = "https://tisvcloud.freeway.gov.tw/history/TDCS/M05A/"
-COLUMNS = ["TimeStamp", "GantryFrom", "GantryTo", "VehicleType", "Speed", "Volume"]
+COLUMNS = ["TimeStamp", "GantryFrom", "GantryTo", "VehicleType", "Avg_speed", "Total_volume"]
 TARGET_IDS = {"05F0287N", "05F0055N"}
 
 # === BigQuery 設定 ===
@@ -27,8 +27,8 @@ TABLE_SCHEMA = [
     {'name': 'TimeStamp', 'type': 'DATETIME'},
     {'name': 'GantryFrom', 'type': 'STRING'},
     {'name': 'GantryTo', 'type': 'STRING'},
-    {'name': 'Speed', 'type': 'FLOAT'},
-    {'name': 'Volume', 'type': 'FLOAT'}
+    {'name': 'Avg_speed', 'type': 'FLOAT'},
+    {'name': 'Total_volume', 'type': 'FLOAT'}
 ]
 
 # === 工具函式 ===
@@ -145,10 +145,11 @@ def scrape_and_process_data(csv_info):
         
         df = pd.read_csv(StringIO(r.text), header=None, names=COLUMNS)
         
+        # 變更：將欄位名稱 'Speed' 和 'Volume' 改為 Avg_speed 和 Total_volume
         filtered_df = df[
             (df["GantryFrom"].isin(TARGET_IDS)) & 
             (df["GantryTo"].isin(TARGET_IDS)) & 
-            (df["Speed"] != 0)
+            (df["Avg_speed"] != 0)
         ].copy()
 
         if filtered_df.empty:
@@ -160,17 +161,19 @@ def scrape_and_process_data(csv_info):
         filtered_df['Time'] = filtered_df['TimeStamp'].dt.time
         
         grouped_df = filtered_df.groupby(["GantryFrom", "GantryTo"]).agg(
-            Speed_mean=("Speed", "mean"),
-            Volume_sum=("Volume", "sum")
+            # 變更：聚合函數名稱與新欄位名稱同步
+            Avg_speed_mean=("Avg_speed", "mean"),
+            Total_volume_sum=("Total_volume", "sum")
         ).reset_index()
 
         grouped_df.insert(0, "Date", filtered_df['Date'].iloc[0])
         grouped_df.insert(1, "Time", filtered_df['Time'].iloc[0])
         grouped_df.insert(2, "TimeStamp", filtered_df['TimeStamp'].iloc[0])
         
+        # 變更：重新命名欄位為新的名稱
         grouped_df = grouped_df.rename(columns={
-            'Speed_mean': 'Speed',
-            'Volume_sum': 'Volume'
+            'Avg_speed_mean': 'Avg_speed',
+            'Total_volume_sum': 'Total_volume'
         })
         
         result = {}
@@ -198,7 +201,9 @@ def load_to_bigquery(processed_data):
     table_ref = client.dataset(DATASET_ID).table(TABLE_ID)
 
     for gantry_id, df in processed_data.items():
-        df = df[[col['name'] for col in TABLE_SCHEMA]]
+        # df = df[[col['name'] for col in TABLE_SCHEMA]]
+        # 變更：這行程式碼有誤，應該使用新的欄位名稱來過濾 DataFrame，以符合 TABLE_SCHEMA 的順序
+        df = df[['Date', 'Time', 'TimeStamp', 'GantryFrom', 'GantryTo', 'Avg_speed', 'Total_volume']]
         
         timestamp = df['TimeStamp'].iloc[0]
         if check_data_exists(TABLE_ID, timestamp, gantry_id):
