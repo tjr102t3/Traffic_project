@@ -142,7 +142,6 @@ def scrape_and_process_data(csv_info):
         
         filtered_df = df[
             (df["GantryFrom"].isin(TARGET_IDS)) & 
-            (df["GantryTo"].isin(TARGET_IDS)) & 
             (df["Avg_speed"] != 0)
         ].copy()
 
