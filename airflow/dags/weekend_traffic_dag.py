@@ -12,10 +12,10 @@ from airflow.tasks.crawler_ver1 import get_target_csv_info, scrape_and_process_d
 with DAG(
     dag_id="weekend_traffic_analysis",
     schedule=[
-        "*/5 23 * * 5", # 每週五 23:00 開始，每 5 分鐘執行一次
-        "*/5 * * * 6",  # 每週六全天，每 5 分鐘執行一次
-        "*/5 * * * 0",  # 每週日全天，每 5 分鐘執行一次
-        "0-30/5 0 * * 1"    # 每週一 00:00 到 00:30，每 5 分鐘執行一次
+        "*/5 23 * * 5",
+        "*/5 * * * 6",
+        "*/5 * * * 0",
+        "0-30/5 0 * * 1"
     ],
     start_date=pendulum.datetime(2025, 8, 8, tz="Asia/Taipei"),
     catchup=False,
