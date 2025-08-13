@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.empty import EmptyOperator
 
 # 從 tasks/crawler.py 匯入任務函式
-from airflow.tasks.crawler_ver1 import get_target_csv_info, scrape_and_process_data, load_to_bigquery
+from airflow.tasks.crawler import get_target_csv_info, scrape_and_process_data, load_to_bigquery
 
 with DAG(
     dag_id="weekend_traffic_analysis",
