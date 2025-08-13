@@ -10,18 +10,12 @@ from airflow.operators.empty import EmptyOperator
 from tasks.crawler import get_target_csv_info, scrape_and_process_data, load_to_bigquery
 
 with DAG(
-    dag_id="weekend_traffic_analysis",
-    schedule=[
-        "*/5 23 * * 5",
-        "*/5 * * * 6",
-        "*/5 * * * 0",
-        "0-30/5 0 * * 1"
-    ],
+    dag_id="monday_traffic_analysis",
+    schedule_interval="0-30/5 0 * * 1",
     start_date=pendulum.datetime(2025, 8, 8, tz="Asia/Taipei"),
     catchup=False,
     tags=["traffic", "crawler", "weekend"],
 ) as dag:
-
     # 任務 1: 取得目標 CSV 檔案資訊
     get_csv_info_task = PythonOperator(
         task_id="get_csv_info",
@@ -34,15 +28,13 @@ with DAG(
         task_id="scrape_and_process",
         python_callable=scrape_and_process_data,
         do_xcom_push=True,
-        # 這裡從上一個任務的 XCom 拉取資料
         op_args=[get_csv_info_task.output]
     )
 
-    # 任務 3: 將資料載入 BigQuery
+    # 3: 將資料載入 BigQuery
     load_to_bigquery_task = PythonOperator(
         task_id="load_to_bigquery",
         python_callable=load_to_bigquery,
-        # 這裡從上一個任務的 XCom 拉取資料
         op_args=[scrape_and_process_task.output]
     )
 
