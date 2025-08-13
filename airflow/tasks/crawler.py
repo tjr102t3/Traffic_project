@@ -19,8 +19,11 @@ TARGET_IDS = {"05F0287N", "05F0055N"}
 PROJECT_ID = "test123-467809"
 # ***需更改***
 DATASET_ID = "bigquery"
-# ***需更改***
-TABLE_ID = "traffic-data"
+# === 新增表格名稱對應關係 ===
+TABLE_MAPPING = {
+    "05F0287N": "traffic-data-05F0287N",
+    "05F0055N": "traffic-data-05F0055N"
+}
 TABLE_SCHEMA = [
     {'name': 'Date', 'type': 'DATE'},
     {'name': 'Time', 'type': 'TIME'},
@@ -74,14 +77,11 @@ def get_target_csv_info(**kwargs):
     now = kwargs['logical_date']
     weekday = now.weekday() # 星期一(0)到星期日(6)
 
-    # 判斷是否為指定的爬取日期與時間，這裡重新加入判斷邏輯
     perform_scrape = False
     
     if weekday == 5 or weekday == 6: # 星期六、日
-        # 只要 DAG 執行，就代表是指定時段
         perform_scrape = True
     elif weekday == 0: # 星期一
-        # 只要 DAG 執行，且時間在 00:00，就符合條件
         if now.hour == 0 and now.minute == 0:
             perform_scrape = True
     
@@ -101,7 +101,6 @@ def get_target_csv_info(**kwargs):
         print(f"⚠️ 找不到 {target_date_str} {target_hour_str} 點的 CSV 檔")
         return None
 
-    # 找到最接近 DAG 執行時間的檔案
     sorted_links = sorted(csv_links)
     
     target_filename_prefix = now.strftime('%Y%m%d_%H%M')
@@ -114,10 +113,6 @@ def get_target_csv_info(**kwargs):
                 timestamp_str = match.group(1)
                 return {'url': link, 'timestamp': timestamp_str}
     
-    # 如果找不到精確的，就退而求其次抓最新的
-    # 所以這邊執行的邏輯是 
-    # -> 透過 Dag 執行時間來查找最近的時間檔案
-    # -> 由於高工局的資料會延遲10分鐘更新，加上為了避免他們系統延誤/維修等狀況所以這樣寫
     latest_csv_url = sorted_links[-1]
     parsed = urlparse(latest_csv_url)
     filename = os.path.basename(parsed.path)
@@ -145,7 +140,6 @@ def scrape_and_process_data(csv_info):
         
         df = pd.read_csv(StringIO(r.text), header=None, names=COLUMNS)
         
-        # 變更：將欄位名稱 'Speed' 和 'Volume' 改為 Avg_speed 和 Total_volume
         filtered_df = df[
             (df["GantryFrom"].isin(TARGET_IDS)) & 
             (df["GantryTo"].isin(TARGET_IDS)) & 
@@ -161,7 +155,6 @@ def scrape_and_process_data(csv_info):
         filtered_df['Time'] = filtered_df['TimeStamp'].dt.time
         
         grouped_df = filtered_df.groupby(["GantryFrom", "GantryTo"]).agg(
-            # 變更：聚合函數名稱與新欄位名稱同步
             Avg_speed_mean=("Avg_speed", "mean"),
             Total_volume_sum=("Total_volume", "sum")
         ).reset_index()
@@ -170,7 +163,6 @@ def scrape_and_process_data(csv_info):
         grouped_df.insert(1, "Time", filtered_df['Time'].iloc[0])
         grouped_df.insert(2, "TimeStamp", filtered_df['TimeStamp'].iloc[0])
         
-        # 變更：重新命名欄位為新的名稱
         grouped_df = grouped_df.rename(columns={
             'Avg_speed_mean': 'Avg_speed',
             'Total_volume_sum': 'Total_volume'
@@ -198,31 +190,33 @@ def load_to_bigquery(processed_data):
         return
 
     client = bigquery.Client(project=PROJECT_ID)
-    table_ref = client.dataset(DATASET_ID).table(TABLE_ID)
 
     for gantry_id, df in processed_data.items():
-        # df = df[[col['name'] for col in TABLE_SCHEMA]]
-        # 變更：這行程式碼有誤，應該使用新的欄位名稱來過濾 DataFrame，以符合 TABLE_SCHEMA 的順序
+        table_id = TABLE_MAPPING.get(gantry_id)
+        if not table_id:
+            print(f"❌ 找不到 {gantry_id} 對應的表格名稱，跳過寫入。")
+            continue
+            
         df = df[['Date', 'Time', 'TimeStamp', 'GantryFrom', 'GantryTo', 'Avg_speed', 'Total_volume']]
         
         timestamp = df['TimeStamp'].iloc[0]
-        if check_data_exists(TABLE_ID, timestamp, gantry_id):
-            print(f"⚠️ {timestamp} 的 {gantry_id} 資料已存在於 BigQuery，跳過寫入。")
+        if check_data_exists(table_id, timestamp, gantry_id):
+            print(f"⚠️ {timestamp} 的 {gantry_id} 資料已存在於表格 '{table_id}'，跳過寫入。")
             continue
 
         try:
             to_gbq(
                 dataframe=df,
-                destination_table=f"{DATASET_ID}.{TABLE_ID}",
+                destination_table=f"{DATASET_ID}.{table_id}",
                 project_id=PROJECT_ID,
                 if_exists="append",
                 chunksize=10000,
                 table_schema=TABLE_SCHEMA
             )
             formatted_timestamp = timestamp.strftime('%Y%m%d_%H%M%S')
-            print(f"✅ 資料已成功寫入 BigQuery，門架 {gantry_id}。")
+            print(f"✅ 資料已成功寫入 BigQuery，門架 {gantry_id}，表格 '{table_id}'。")
             print(f"記錄名稱範例：{formatted_timestamp}_{gantry_id}")
 
         except Exception as e:
-            print(f"❌ 寫入 BigQuery 失敗，門架 {gantry_id}: {e}")
+            print(f"❌ 寫入 BigQuery 失敗，門架 {gantry_id}，表格 '{table_id}': {e}")
             raise
