@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Airflow 服務
   airflow:
     build: .
     ports:
@@ -9,14 +8,17 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
-      - ./utils:/opt/airflow/utils
       - ./tasks:/opt/airflow/tasks
+      - ./data_clean:/opt/airflow/data_clean 
+      - ./lstm_model:/opt/airflow/lstm_model
+      - ./Bigquerykey.json:/opt/airflow/Bigquerykey.json
+      - ./utils:/opt/airflow/utils
     environment:
       - PYTHONPATH=/opt/airflow
+
     depends_on:
       - mongodb
 
-  # MongoDB 服務
   mongodb:
     image: mongo:latest
     container_name: mongodb
