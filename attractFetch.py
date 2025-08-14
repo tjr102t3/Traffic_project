@@ -1,10 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import json
 import math
+from google.cloud import storage # 引入 GCS 函式庫
 
-app = Flask(__name__)
-CORS(app)  # 允許所有來源，開發測試用
+app = Flask(__name__, static_folder='static')
+CORS(app) # 允許所有來源，開發測試用
+
+# 定義 GCS 儲存桶名稱
+BUCKET_NAME = "trafficwebdemo-data"
 
 # 計算兩點球面距離
 def haversine_distance(lat1, lon1, lat2, lon2):
@@ -18,24 +22,32 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return round(R * c, 2)
 
 def load_all_places():
+    """從 Google Cloud Storage 讀取 JSON 檔案"""
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME) # 修正: 將儲存桶名稱改為字串
+
     file_paths = {
-        "咖啡廳": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
-        "伴手禮": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
-        "溫泉": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
-        "加油站": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json"
+        "咖啡廳": "MongoDBoutput.json",
+        "伴手禮": "MongoDBoutput.json",
+        "溫泉": "MongoDBoutput.json",
+        "加油站": "MongoDBoutput.json"
     }
     all_places = {}
-    for category, path in file_paths.items():
+
+    for category, file_name in file_paths.items():
         try:
-            with open(path, "r", encoding="utf-8") as f:
-                all_places[category] = json.load(f)
+            # 修正: 從 GCS Blob 讀取檔案
+            blob = bucket.blob(file_name)
+            data = blob.download_as_bytes()
+            all_places[category] = json.loads(data)
         except Exception as e:
             print(f"❌ 讀取 {category} 失敗：{e}")
             all_places[category] = []
-
+            
     return all_places
 
 def find_nearest_by_category(user_lat, user_lon):
+    # 這裡的程式碼沒有問題，會使用 load_all_places() 載入資料
     all_places = load_all_places()
     result = {}
 
@@ -72,6 +84,10 @@ def receive_location():
 
     nearest = find_nearest_by_category(lat, lng)
     return jsonify(nearest)
+
+@app.route('/')
+def serve_index():
+    return render_template('index.html') # 假設你的 HTML 檔案叫做 index.html
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
