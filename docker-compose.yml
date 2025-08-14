@@ -16,7 +16,8 @@ services:
 
     depends_on:
       - mongodb
-
+    
+    command: airflow standalone
   mongodb:
     image: mongo:latest
     container_name: mongodb
