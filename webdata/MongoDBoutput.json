@@ -1,0 +1,373 @@
+[
+    {
+        "name": "九號咖啡外澳館",
+        "address": "26144宜蘭縣頭城鎮濱海路二段6號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/3DkxW4qTgsimMrsa6",
+        "lng": "24.8887958966278",
+        "lat": "121.868491425058"
+    },
+    {
+        "name": "浪人咖啡廳 Surfer Cafe’ Shop",
+        "address": "261宜蘭縣頭城鎮烏石港路102-1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/n4au255TfDtt9CMv6",
+        "lng": "24.87647",
+        "lat": "121.836292"
+    },
+    {
+        "name": "這浬咖啡文創所",
+        "address": "261宜蘭縣頭城鎮烏石港路92-1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/bKTXkHkZVHpSGSuo6",
+        "lng": "24.877584",
+        "lat": "121.821456"
+    },
+    {
+        "name": "coco椰林",
+        "address": "261宜蘭縣頭城鎮烏石港路300號2樓",
+        "googlemap": "https:\/\/maps.app.goo.gl\/RhCM8zD2P4puHCUq7",
+        "lng": 24.871193,
+        "lat": 121.841081
+    },
+    {
+        "name": "壹咖啡烏石港",
+        "address": "261宜蘭縣頭城鎮烏石港路168號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/JWGoLS5BR2dnqAdP7",
+        "lng": 24.869926,
+        "lat": 121.838077
+    },
+    {
+        "name": "Tjuku cafe 啾咕咖啡 烏石港店",
+        "address": "261宜蘭縣頭城鎮港墘路60號2樓",
+        "googlemap": "https:\/\/maps.app.goo.gl\/93FmMgexs5BUY8a9A",
+        "lng": 24.869597,
+        "lat": 121.834908
+    },
+    {
+        "name": "Tjuku cafe 啾咕咖啡-蘭陽博物館店",
+        "address": "261宜蘭縣頭城鎮青雲路三段750號1樓",
+        "googlemap": "https:\/\/maps.app.goo.gl\/1oBCGJmbbdK1ujaU6",
+        "lng": 24.868991,
+        "lat": 121.831769
+    },
+    {
+        "name": "星巴克（宜蘭頭城門市）",
+        "address": "261宜蘭縣頭城鎮青雲路三段396號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/7fFFc8eYiA7A27kC6",
+        "lng": 24.862288,
+        "lat": 121.830984
+    },
+    {
+        "name": "木房子 咖啡 ‧ 茶館",
+        "address": "261宜蘭縣頭城鎮復興路111-6號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/B9DoCdYYtWQSRbgJ6",
+        "lng": 24.865325,
+        "lat": 121.822144
+    },
+    {
+        "name": "川岩 River Stone Coffee",
+        "address": "261宜蘭縣頭城鎮協天路636巷36-2號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/QyaEC2z26ht2krB69",
+        "lng": 24.856974,
+        "lat": 121.83286
+    },
+    {
+        "name": "滿山望海",
+        "address": "261宜蘭縣頭城鎮大坑路211號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/VNNzjFcHgGq8mLuu5",
+        "lng": 24.854621,
+        "lat": 121.831227
+    },
+    {
+        "name": "知客軒主題咖啡館(Cozy Corner)",
+        "address": "261宜蘭縣頭城鎮文雅路35巷1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/zPmpHxR5cywfc1Ls7",
+        "lng": 24.863032,
+        "lat": 121.819597
+    },
+    {
+        "name": "OVERTIME COFFEE 金少爺咖啡",
+        "address": "261宜蘭縣頭城鎮東五巷7號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/dRnr2DAUH9iksA5A8",
+        "lng": 24.857047,
+        "lat": 121.823628
+    },
+    {
+        "name": "蘭城雨啡RainTownCafe",
+        "address": "261003宜蘭縣頭城鎮和平街68號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/gmJ4Si1CdRf4DnNb9",
+        "lng": 24.856678,
+        "lat": 121.823055
+    },
+    {
+        "name": "洄城咖啡",
+        "address": "261宜蘭縣頭城鎮吉祥路44號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/NbDbjrFk12cRLa6x7",
+        "lng": 24.856707,
+        "lat": 121.822036
+    },
+    {
+        "name": "手拙",
+        "address": "261宜蘭縣頭城鎮青雲路二段691號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/mgc7DeKJhRiyuSuW6",
+        "lng": 24.849764,
+        "lat": 121.814755
+    },
+    {
+        "name": "捌㡯珈琲",
+        "address": "261宜蘭縣頭城鎮青雲路二段650號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/kABGvCaZwwAuKadDA",
+        "lng": 24.84757,
+        "lat": 121.81349
+    },
+    {
+        "name": "pal coffee",
+        "address": "261宜蘭縣頭城鎮吉祥路9-1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/zePVVYJzcaeBLbLb8",
+        "lng": 24.857723,
+        "lat": 121.825043
+    },
+    {
+        "name": "小溪邊咖啡",
+        "address": "261宜蘭縣頭城鎮頂埔路一段178巷22號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/JMdGDhjoikeFPWxE6",
+        "lng": 24.848377,
+        "lat": 121.820853
+    },
+    {
+        "name": "黑宅 Black House",
+        "address": "261宜蘭縣頭城鎮三和路616巷235弄47號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/tioHuJ8q1kVwtbeE8",
+        "lng": 24.837166,
+        "lat": 121.808091
+    },
+    {
+        "name": "Calmhere Caffè",
+        "address": "262宜蘭縣礁溪鄉礁溪路七段103巷5號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/ZLjUG8JREX6SgnQv5",
+        "lng": 24.840164,
+        "lat": 121.793368
+    },
+    {
+        "name": "三草二木café",
+        "address": "262宜蘭縣礁溪鄉白雲二路1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/H7jHx13HFxgmFYQC7",
+        "lng": 24.835295,
+        "lat": 121.784006
+    },
+    {
+        "name": "定邦咖啡",
+        "address": "262宜蘭縣礁溪鄉白雲二路173號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/V1A2mJyErNMSvaeq9",
+        "lng": 24.830683,
+        "lat": 121.784757
+    },
+    {
+        "name": "咖啡浴 FURO CAFÉ",
+        "address": "262宜蘭縣礁溪鄉德陽街3號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/o9cwqkwpvHiGSqEW9",
+        "lng": 24.827493,
+        "lat": 121.777939
+    },
+    {
+        "name": "Louisa Coffee 路易莎咖啡(宜蘭礁溪店)",
+        "address": "262宜蘭縣礁溪鄉礁溪路五段48號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/nWwJCtjwc9VF7baE7",
+        "lng": 24.826516,
+        "lat": 121.768501
+    },
+    {
+        "name": "時間到咖啡館",
+        "address": "262宜蘭縣礁溪鄉公園路16-1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/wfL6NU4zUULstdfr8",
+        "lng": 24.832134,
+        "lat": 121.781914
+    },
+    {
+        "name": "幸福咖啡HSING FU CAFÉ",
+        "address": "262宜蘭縣礁溪鄉公園路72號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/kemHfXZScZndu4679",
+        "lng": 24.833291,
+        "lat": 121.777423
+    },
+    {
+        "name": "星巴克（礁溪門市）",
+        "address": "262宜蘭縣礁溪鄉礁溪路五段118號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/aDX67oaRoLxJdeNZA",
+        "lng": 24.828021,
+        "lat": 121.773414
+    },
+    {
+        "name": "no other 咖啡 甜點",
+        "address": "262宜蘭縣礁溪鄉德陽路1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/dywVyYM8XmNgoTua8",
+        "lng": 24.827222,
+        "lat": 121.774551
+    },
+    {
+        "name": "工藝咖啡",
+        "address": "262宜蘭縣礁溪鄉德陽街21之一號1樓",
+        "googlemap": "https:\/\/maps.app.goo.gl\/tNTxiEYUzJ9UK32s9",
+        "lng": 24.825703,
+        "lat": 121.77498
+    },
+    {
+        "name": "珈琲 方島",
+        "address": "262宜蘭縣礁溪鄉礁溪路五段90巷2-1號之 2",
+        "googlemap": "https:\/\/maps.app.goo.gl\/V16YwpD27L5dS8mv8",
+        "lng": 24.826722,
+        "lat": 121.772335
+    },
+    {
+        "name": "食潮",
+        "address": "262宜蘭縣礁溪鄉仁愛路48巷18弄1號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/Jen9t3bdraseweEz6",
+        "lng": 24.828347,
+        "lat": 121.769786
+    },
+    {
+        "name": "森晴對樺CH_sweet 礁溪甜點咖啡廳",
+        "address": "262002宜蘭縣礁溪鄉湯圍街一號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/oFh1fhYpm2trGrf26",
+        "lng": 24.825457,
+        "lat": 121.772844
+    },
+    {
+        "name": "杉杉來茈",
+        "address": "262宜蘭縣礁溪鄉大忠路31號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/NkH4JFCjxowLL1HM6",
+        "lng": 24.819655,
+        "lat": 121.765861
+    },
+    {
+        "name": "初 firstday food 早午餐",
+        "address": "262宜蘭縣礁溪鄉礁溪路四段22號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/REwkgeSqCSigyMTB6",
+        "lng": 24.818603,
+        "lat": 121.771741
+    },
+    {
+        "name": "抹茶山下",
+        "address": "262宜蘭縣礁溪鄉林尾路42之25號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/DQuyUaY3QNQWk5K27",
+        "lng": 24.821564,
+        "lat": 121.75848
+    },
+    {
+        "name": "吸貓咖啡館",
+        "address": "262宜蘭縣礁溪鄉三路113號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/bqaMTz35cNC4P5ZX8",
+        "lng": 24.804491,
+        "lat": 121.799265
+    },
+    {
+        "name": "華金斯太太咖啡",
+        "address": "262宜蘭縣礁溪鄉十六結路103之五號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/RhjsDPQHWXNvTkcFA",
+        "lng": 24.813209,
+        "lat": 121.755482
+    },
+    {
+        "name": "Amaze兔子迷宮~礁溪浴場",
+        "address": "262宜蘭縣礁溪鄉林尾路42-9號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/ZZpCWvXZXmCtmLfN9",
+        "lng": 24.824084,
+        "lat": 121.74913
+    },
+    {
+        "name": "食聚咖啡Gather café",
+        "address": "263宜蘭縣壯圍鄉壯濱路二段277號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/QePn13tXfbqy6WD5A",
+        "lng": 24.747183,
+        "lat": 121.810496
+    },
+    {
+        "name": "真島咖啡",
+        "address": "260宜蘭縣宜蘭市吉祥路91號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/hbDbYhS8gudgbWAz5",
+        "lng": 24.761291,
+        "lat": 121.760028
+    },
+    {
+        "name": "散步Cafe Sanpo",
+        "address": "260宜蘭縣宜蘭市和睦路2之20號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/JJZtuZqHuZhh2egg7",
+        "lng": 24.751024,
+        "lat": 121.75934
+    },
+    {
+        "name": "伯朗咖啡館 - 礁溪門市",
+        "address": "262宜蘭縣礁溪鄉玉石路44-5號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/ZR4JaKHbMgWDsdscA",
+        "lng": 24.831234,
+        "lat": 121.821965
+    },
+    {
+        "name": "After Coffee",
+        "address": "263宜蘭縣壯圍鄉美福路三段48-42號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/GRowb2rGMvzJBMap9",
+        "lng": 24.734004,
+        "lat": 121.788068
+    },
+    {
+        "name": "雨山咖啡 STUD!O",
+        "address": "260宜蘭縣宜蘭市建業路87號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/gjQ7Ew5SPW4duTp19",
+        "lng": 24.730481,
+        "lat": 121.748669
+    },
+    {
+        "name": "伯朗咖啡館 - 員山門市",
+        "address": "264宜蘭縣員山鄉員山路二段326號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/YaFWmVwfFBBkscdJA",
+        "lng": 24.715851,
+        "lat": 121.698386
+    },
+    {
+        "name": "黑RURU CAFÉ",
+        "address": "268宜蘭縣五結鄉大眾六路365號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/RD4bSkhvum2ekYqx8",
+        "lng": 24.708669,
+        "lat": 121.846481
+    },
+    {
+        "name": "享咖coffee",
+        "address": "268宜蘭縣五結鄉五結路二段528號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/S5kQgfFNSHoGTgy7A",
+        "lng": 24.688694,
+        "lat": 121.815532
+    },
+    {
+        "name": "屋諾咖啡",
+        "address": "268宜蘭縣五結鄉中正路二段17號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/DAPRJsRivogwUQjb8",
+        "lng": 24.698923,
+        "lat": 121.781177
+    },
+    {
+        "name": "寒山咖啡",
+        "address": "265宜蘭縣羅東鎮和平路99號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/bheBQJQmrpZ6qaSx9",
+        "lng": 24.678483,
+        "lat": 121.774869
+    },
+    {
+        "name": "巷光咖啡 To Light Coffee Roasters",
+        "address": "265宜蘭縣羅東鎮公正街22號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/V551FjbwuVKyW39F7",
+        "lng": 24.678461,
+        "lat": 121.77115
+    },
+    {
+        "name": "小揭商行 COFFEE STREET CO.",
+        "address": "265宜蘭縣羅東鎮公正街17號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/tkM64vQEfBERuJ5v6",
+        "lng": 24.678013,
+        "lat": 121.76982
+    },
+    {
+        "name": "鹿咖啡工坊",
+        "address": "265宜蘭縣羅東鎮南門路148號",
+        "googlemap": "https:\/\/maps.app.goo.gl\/YbTCVJEcLwUMzKbf8",
+        "lng": 24.673588,
+        "lat": 121.766376
+    }
+]
