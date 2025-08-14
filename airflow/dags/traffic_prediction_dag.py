@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import torch
 import torch.nn as nn
+
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -96,7 +97,6 @@ def run_all_predictions(**kwargs):
 
         df = df.iloc[::-1].reset_index(drop=True)
         
-        # === 新增這兩行：確保資料類型為 float ===
         df['Avg_speed'] = pd.to_numeric(df['Avg_speed'], errors='coerce')
         df['Total_volume'] = pd.to_numeric(df['Total_volume'], errors='coerce')
         
