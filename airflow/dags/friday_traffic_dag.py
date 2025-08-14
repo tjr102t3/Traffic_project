@@ -5,6 +5,7 @@ from airflow.models.dag import DAG
 # 匯入 PythonOperator，讓 python 函式轉化成可以被 airflow 管理和執行的任務
 from airflow.operators.python import PythonOperator
 from airflow.operators.empty import EmptyOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 # 從 tasks/crawler.py 匯入任務函式
 from tasks.crawler import get_target_csv_info, scrape_and_process_data, load_to_bigquery
@@ -37,6 +38,10 @@ with DAG(
         python_callable=load_to_bigquery,
         op_args=[scrape_and_process_task.output]
     )
-
+    trigger_prediction_dag_task = TriggerDagRunOperator(
+        task_id="trigger_prediction_dag",
+        trigger_dag_id="traffic_prediction_dag",  
+        conf={"message": "Data loaded, starting prediction!"}
+    )
     # 定義任務順序
-    get_csv_info_task >> scrape_and_process_task >> load_to_bigquery_task
+    get_csv_info_task >> scrape_and_process_task >> load_to_bigquery_task >> trigger_prediction_dag_task
