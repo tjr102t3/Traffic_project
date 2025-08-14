@@ -81,24 +81,32 @@ def run_all_predictions(**kwargs):
     for gantry_id, table_name in TABLE_MAPPING.items():
         print("---")
         print(f"正在處理門架：{gantry_id}...")
-
+        
         # 步驟1: 從 BigQuery 抓取資料
-        query = f"""
-        SELECT Avg_speed, Total_volume
-        FROM `{PROJECT_ID}.{DATASET_ID}.{table_name}`
-        ORDER BY TimeStamp DESC
-        LIMIT {sequence_length}
-        """
+        # ... (抓取資料的程式碼不變)
         df = client_bq.query(query).to_dataframe()
 
         if len(df) < sequence_length:
             print(f"⚠️ 門架 {gantry_id} 數據不足 {sequence_length} 筆，跳過預測。")
             continue
-
+        
         df = df.iloc[::-1].reset_index(drop=True)
         
         df['Avg_speed'] = pd.to_numeric(df['Avg_speed'], errors='coerce')
         df['Total_volume'] = pd.to_numeric(df['Total_volume'], errors='coerce')
+
+        # === 修改點：新增資料清洗步驟 ===
+        # 移除包含 NaN 值的資料列
+        original_rows = len(df)
+        df.dropna(inplace=True)
+        cleaned_rows = len(df)
+        if original_rows != cleaned_rows:
+            print(f"警告：門架 {gantry_id} 資料中包含 NaN 值，已移除 {original_rows - cleaned_rows} 筆資料。")
+        
+        # 檢查資料清洗後，資料筆數是否足夠
+        if len(df) < sequence_length:
+            print(f"⚠️ 門架 {gantry_id} 清洗後數據不足 {sequence_length} 筆，跳過預測。")
+            continue
         
         # 步驟2: 模型預測
         latest_features_np = df[['Avg_speed', 'Total_volume']].values[-sequence_length:]
