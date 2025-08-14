@@ -1,0 +1,19 @@
+[
+  {
+    "name":"PinglineToToucheng",
+    "timestamp": "2025-08-07 11:00",
+    "predictSpeed": 45
+  },
+  { "name":"TouchengToNangang",
+    "timestamp": "2025-08-07 11:05",
+    "predictSpeed": 56
+  },
+  {"name":"PinglineToToucheng",
+    "timestamp": "2025-08-07 11:10",
+    "predictSpeed": 68
+  },
+  { "name":"TouchengToNangang",
+    "timestamp": "2025-08-07 11:15",
+    "predictSpeed": 20
+  }
+]
