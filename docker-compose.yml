@@ -1,23 +1,25 @@
 services:
+  # Airflow 服務
   airflow:
     build: .
     ports:
       - "8080:8080"
     volumes:
+      # 這些路徑指向根目錄下的 'airflow' 子目錄
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/tasks:/opt/airflow/tasks
-      - ./airflow/data_clean:/opt/airflow/data_clean 
-      - ./airflow/lstm_model:/opt/airflow/lstm_model
-      - ./airflow/Bigquerykey.json:/opt/airflow/Bigquerykey.json
       - ./airflow/utils:/opt/airflow/utils
+      - ./airflow/tasks:/opt/airflow/tasks
+      - ./airflow/data_clean:/opt/airflow/data_clean
+      # 這個路徑指向根目錄下的 'lstm_model' 子目錄
+      - ./lstm_model:/opt/airflow/lstm_model 
     environment:
       - PYTHONPATH=/opt/airflow
-
     depends_on:
       - mongodb
-    
     command: airflow standalone
+
+  # MongoDB 服務
   mongodb:
     image: mongo:latest
     container_name: mongodb
