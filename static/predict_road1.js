@@ -1,5 +1,5 @@
 // JSON 檔案的 URL
-const jsonUrl = '   dataTest.json';
+const jsonUrl = 'https://storage.googleapis.com/trafficwebdemo-data/dataTest.json';
 
 // 根據時速判斷對應的顏色類別
 function getColorBySpeed(speed) {
