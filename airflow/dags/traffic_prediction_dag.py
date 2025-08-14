@@ -54,27 +54,51 @@ class LSTMModel(nn.Module):
 # === 核心任務函式：整合所有邏輯 ===
 # ====================================================================
 def run_all_predictions(**kwargs):
-    # ... (載入模型和 MongoDB 連線的程式碼)
+    """
+    對所有門架執行資料抓取、模型預測與 MongoDB 儲存。
+    """
+    print("模型預測 DAG 已被觸發，開始執行預測任務。")
+    client_bq = bigquery.Client(project=PROJECT_ID)
+    
+    # === 新增：連接 MongoDB ===
+    try:
+        mongo_client = MongoClient('mongodb', 27017)
+        db = mongo_client['traffic_predictions']
+        print("成功連接到 MongoDB。")
+    except Exception as e:
+        print(f"連接 MongoDB 失敗：{e}")
+        raise
+
+    # 載入模型
+    if not os.path.exists(MODEL_SAVE_PATH):
+        raise FileNotFoundError(f"找不到模型檔案：{MODEL_SAVE_PATH}")
+    
+    loaded_model = LSTMModel(input_size, hidden_size, num_layers, output_size)
+    loaded_model.load_state_dict(torch.load(MODEL_SAVE_PATH))
+    loaded_model.eval()
+    print("模型已成功載入並設定為評估模式。")
 
     for gantry_id, table_name in TABLE_MAPPING.items():
         print("---")
         print(f"正在處理門架：{gantry_id}...")
-    
+
         # 步驟1: 從 BigQuery 抓取資料
+        # **重要：在這裡加入 query 變數的定義！**
         query = f"""
             SELECT Avg_speed, Total_volume, TimeStamp
             FROM `{PROJECT_ID}.{DATASET_ID}.{table_name}`
             ORDER BY TimeStamp DESC
             LIMIT {sequence_length}
         """
+
         df = client_bq.query(query).to_dataframe()
 
         if len(df) < sequence_length:
             print(f"⚠️ 門架 {gantry_id} 數據不足 {sequence_length} 筆，跳過預測。")
             continue
 
-        # 新增：確保 DataFrame 中的所有資料都是數字
-        # 這個步驟會將非數字的內容都變成 NaN，然後我們再移除這些列
+        df = df.iloc[::-1].reset_index(drop=True)
+        
         df['Avg_speed'] = pd.to_numeric(df['Avg_speed'], errors='coerce')
         df['Total_volume'] = pd.to_numeric(df['Total_volume'], errors='coerce')
 
@@ -84,18 +108,14 @@ def run_all_predictions(**kwargs):
         cleaned_rows = len(df)
         if original_rows != cleaned_rows:
             print(f"警告：門架 {gantry_id} 資料中包含 NaN 值，已移除 {original_rows - cleaned_rows} 筆資料。")
-
+        
         # 檢查資料清洗後，資料筆數是否足夠
         if len(df) < sequence_length:
             print(f"⚠️ 門架 {gantry_id} 清洗後數據不足 {sequence_length} 筆，跳過預測。")
             continue
 
-        # 確保順序正確
-        df = df.iloc[::-1].reset_index(drop=True)
-        
         # 步驟2: 模型預測
-        # 在這裡，我們再次明確地轉換資料型態，確保它是 float
-        latest_features_np = df[['Avg_speed', 'Total_volume']].astype('float32').values[-sequence_length:]
+        latest_features_np = df[['Avg_speed', 'Total_volume']].values[-sequence_length:]
         input_for_prediction = torch.tensor(latest_features_np, dtype=torch.float32).unsqueeze(0)
 
         with torch.no_grad():
@@ -118,7 +138,6 @@ def run_all_predictions(**kwargs):
 
     mongo_client.close()
     print("MongoDB 連接已關閉。")
-
 
 # ====================================================================
 # === Airflow DAG 設定 ===
