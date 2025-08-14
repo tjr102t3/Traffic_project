@@ -4,13 +4,13 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./dags:/opt/airflow/dags
-      - ./logs:/opt/airflow/logs
-      - ./tasks:/opt/airflow/tasks
-      - ./data_clean:/opt/airflow/data_clean 
-      - ./lstm_model:/opt/airflow/lstm_model
-      - ./Bigquerykey.json:/opt/airflow/Bigquerykey.json
-      - ./utils:/opt/airflow/utils
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/tasks:/opt/airflow/tasks
+      - ./airflow/data_clean:/opt/airflow/data_clean 
+      - ./airflow/lstm_model:/opt/airflow/lstm_model
+      - ./airflow/Bigquerykey.json:/opt/airflow/Bigquerykey.json
+      - ./airflow/utils:/opt/airflow/utils
     environment:
       - PYTHONPATH=/opt/airflow
 
