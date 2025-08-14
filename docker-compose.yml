@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Airflow 服務
+  airflow:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./utils:/opt/airflow/utils
+      - ./tasks:/opt/airflow/tasks
+    environment:
+      - PYTHONPATH=/opt/airflow
+    depends_on:
+      - mongodb
+
+  # MongoDB 服務
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
