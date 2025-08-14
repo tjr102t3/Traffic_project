@@ -68,7 +68,7 @@ def run_all_predictions(**kwargs):
     except Exception as e:
         print(f"連接 MongoDB 失敗：{e}")
         raise
-
+    
     # 載入模型
     if not os.path.exists(MODEL_SAVE_PATH):
         raise FileNotFoundError(f"找不到模型檔案：{MODEL_SAVE_PATH}")
@@ -77,54 +77,59 @@ def run_all_predictions(**kwargs):
     loaded_model.load_state_dict(torch.load(MODEL_SAVE_PATH))
     loaded_model.eval()
     print("模型已成功載入並設定為評估模式。")
-
+    
     for gantry_id, table_name in TABLE_MAPPING.items():
         print("---")
         print(f"正在處理門架：{gantry_id}...")
-
+        
         # 步驟1: 從 BigQuery 抓取資料
-        # **重要：在這裡加入 query 變數的定義！**
         query = f"""
             SELECT Avg_speed, Total_volume, TimeStamp
             FROM `{PROJECT_ID}.{DATASET_ID}.{table_name}`
             ORDER BY TimeStamp DESC
             LIMIT {sequence_length}
         """
-
         df = client_bq.query(query).to_dataframe()
-
+        
         if len(df) < sequence_length:
             print(f"⚠️ 門架 {gantry_id} 數據不足 {sequence_length} 筆，跳過預測。")
             continue
-
+        
         df = df.iloc[::-1].reset_index(drop=True)
         
+        # 步驟2: 資料清洗與前處理 🧹
+        # 確保資料型別為數值，並將非數值轉換為 NaN
         df['Avg_speed'] = pd.to_numeric(df['Avg_speed'], errors='coerce')
         df['Total_volume'] = pd.to_numeric(df['Total_volume'], errors='coerce')
-
-        # 移除包含 NaN 值的資料列
-        original_rows = len(df)
-        df.dropna(inplace=True)
-        cleaned_rows = len(df)
-        if original_rows != cleaned_rows:
-            print(f"警告：門架 {gantry_id} 資料中包含 NaN 值，已移除 {original_rows - cleaned_rows} 筆資料。")
         
-        # 檢查資料清洗後，資料筆數是否足夠
+        # 檢查是否存在 NaN
+        if df.isnull().values.any():
+            print(f"警告：門架 {gantry_id} 資料中包含 NaN 值。")
+            # 💡 選擇一個處理策略：
+            # 移除包含 NaN 的資料列
+            df.dropna(inplace=True)
+            print(f"已移除包含 NaN 的資料列。剩餘資料筆數: {len(df)}")
+            
+        # 確認清洗後資料筆數是否仍然足夠
         if len(df) < sequence_length:
-            print(f"⚠️ 門架 {gantry_id} 清洗後數據不足 {sequence_length} 筆，跳過預測。")
+            print(f"⚠️ 門架 {gantry_id} 資料清洗後筆數不足 {sequence_length}，跳過預測。")
             continue
-
-        # 步驟2: 模型預測
+        
+        # 步驟3: 模型預測 🤖
         latest_features_np = df[['Avg_speed', 'Total_volume']].values[-sequence_length:]
-        input_for_prediction = torch.tensor(latest_features_np, dtype=torch.float32).unsqueeze(0)
-
+        
+        # 💡 重要：強制指定 NumPy 陣列的型別
+        latest_features_np = latest_features_np.astype('float32')
+        
+        input_for_prediction = torch.tensor(latest_features_np).unsqueeze(0)
+        
         with torch.no_grad():
             predicted_speed_tensor = loaded_model(input_for_prediction)
-
+        
         predicted_average_speed = predicted_speed_tensor.squeeze().item()
         print(f"門架 {gantry_id} 預測的下一個時間步平均車速為: {predicted_average_speed:.2f}")
-
-        # === 步驟3: 儲存到 MongoDB ===
+        
+        # === 步驟4: 儲存到 MongoDB ===
         # 使用門架 ID 來動態選擇不同的 Collection
         collection = db[f'predicted_speeds_{gantry_id}']
         
@@ -135,7 +140,7 @@ def run_all_predictions(**kwargs):
         }
         collection.insert_one(prediction_record)
         print(f"預測結果已成功儲存至 MongoDB，門架 ID: {gantry_id}，集合名稱: {collection.name}")
-
+        
     mongo_client.close()
     print("MongoDB 連接已關閉。")
 
