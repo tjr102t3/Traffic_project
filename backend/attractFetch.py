@@ -19,10 +19,10 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 
 def load_all_places():
     file_paths = {
-        "咖啡廳": "MongoDBoutput.json",
-        "伴手禮": "MongoDBoutput.json",
-        "溫泉": "MongoDBoutput.json",
-        "加油站": "MongoDBoutput.json"
+        "咖啡廳": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
+        "伴手禮": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
+        "溫泉": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json",
+        "加油站": "/home/webserver-gcp-user/Traffic_project/MongoDBoutput.json"
     }
     all_places = {}
     for category, path in file_paths.items():

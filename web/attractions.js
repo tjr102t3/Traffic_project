@@ -18,7 +18,7 @@ document.getElementById('allowBtn').addEventListener('click', function() {
         };
 
         // 用 fetch 發送 POST 請求（保證拿到位置後才送）
-        fetch('http://127.0.0.1:5000/api/location', {
+        fetch('/api/location', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
