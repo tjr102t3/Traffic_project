@@ -33,6 +33,11 @@ with DAG(
     )
 
     # 3: 將資料載入 BigQuery
+    load_to_bigquery_task = PythonOperator(
+        task_id="load_to_bigquery",
+        python_callable=load_to_bigquery,
+        op_args=[scrape_and_process_task.output]
+    )
     trigger_prediction_dag_task = TriggerDagRunOperator(
         task_id="trigger_prediction_dag",
         trigger_dag_id="traffic_prediction_dag",  
