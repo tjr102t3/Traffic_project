@@ -27,10 +27,10 @@ def load_all_places():
     bucket = client.bucket(BUCKET_NAME) # 修正: 將儲存桶名稱改為字串
 
     file_paths = {
-        "咖啡廳": "MongoDBoutput.json",
-        "伴手禮": "MongoDBoutput.json",
-        "溫泉": "MongoDBoutput.json",
-        "加油站": "MongoDBoutput.json"
+        "咖啡廳": "attractions_data/coffee.json",
+        "伴手禮": "attractions_data/souvenirs.json",
+        "溫泉": "attractions_data/hotspring.json",
+        "加油站": "attractions_data/gasStations.json"
     }
     all_places = {}
 
@@ -91,4 +91,3 @@ def serve_index():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
-
