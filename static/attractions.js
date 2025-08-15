@@ -45,7 +45,7 @@ document.getElementById('allowBtn').addEventListener('click', function() {
               result[category].forEach(place => {
                 const li = document.createElement('li');
                 li.className = "list-group-item";
-                li.innerHTML = `${place.名稱} <a href="${place.網址}">${place.地址}</a>`;
+                li.innerHTML = `${place.名稱} <a href="${place.網址}" target="_blank">${place.地址}</a>`;
                 ul.appendChild(li);
               });
             } else {
