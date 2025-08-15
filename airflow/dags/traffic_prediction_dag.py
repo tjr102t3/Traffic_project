@@ -84,7 +84,10 @@ def run_all_predictions(**kwargs):
         
         # 步驟1: 從 BigQuery 抓取資料
         query = f"""
-            SELECT Avg_speed, Total_volume, TimeStamp
+            SELECT
+                CAST(Avg_speed AS FLOAT64) AS Avg_speed,
+                CAST(Total_volume AS INT64) AS Total_volume,
+                TimeStamp
             FROM `{PROJECT_ID}.{DATASET_ID}.{table_name}`
             ORDER BY TimeStamp DESC
             LIMIT {sequence_length}

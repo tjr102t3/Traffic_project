@@ -11,7 +11,7 @@ from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from tasks.crawler import get_target_csv_info, scrape_and_process_data, load_to_bigquery
 
 with DAG(
-    dag_id="friday_traffic_analysis",
+    dag_id="monday_traffic_analysis",
     schedule_interval="0-30/5 0 * * 1",
     start_date=pendulum.datetime(2025, 8, 8, tz="Asia/Taipei"),
     catchup=False,
