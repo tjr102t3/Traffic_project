@@ -16,7 +16,7 @@ TARGET_IDS = {"05F0287N", "05F0055N"}
 
 # === BigQuery 設定 ===
 # ***需更改***
-PROJECT_ID = "test123-467809"
+PROJECT_ID = "tjr102-traffic-project"
 # ***需更改***
 DATASET_ID = "bigquery"
 # === 新增表格名稱對應關係 ===
