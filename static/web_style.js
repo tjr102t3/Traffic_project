@@ -1,6 +1,6 @@
 // 頁面載入後立即執行一次，顯示初始路況
 document.addEventListener('DOMContentLoaded', () => {
-    updateTrafficStatusFromJson();
+    updateTrafficStatusFromApi();
 });
 
 // 切換icon

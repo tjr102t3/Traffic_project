@@ -2,13 +2,13 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import json
 import math
-from google.cloud import storage # 引入 GCS 函式庫
+from google.cloud import storage
 
 app = Flask(__name__, static_folder='static')
 CORS(app) # 允許所有來源，開發測試用
 
 # 定義 GCS 儲存桶名稱
-BUCKET_NAME = "trafficwebdemo-data"
+BUCKET_NAME = "traffic-web-data"
 
 # 計算兩點球面距離
 def haversine_distance(lat1, lon1, lat2, lon2):
@@ -23,31 +23,37 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 
 def load_all_places():
     """從 Google Cloud Storage 讀取 JSON 檔案"""
-    client = storage.Client()
-    bucket = client.bucket(BUCKET_NAME) # 修正: 將儲存桶名稱改為字串
+    try:
+        client = storage.Client()
+        bucket = client.bucket(BUCKET_NAME)
 
-    file_paths = {
-        "咖啡廳": "attractions_data/coffee.json",
-        "伴手禮": "attractions_data/souvenirs.json",
-        "溫泉": "attractions_data/hotspring.json",
-        "加油站": "attractions_data/gasStations.json"
-    }
-    all_places = {}
+        file_paths = {
+            "咖啡廳": "attractions_data/coffee.json",
+            "伴手禮": "attractions_data/souvenirs.json",
+            "溫泉": "attractions_data/hotspring.json",
+            "加油站": "attractions_data/gasStations.json"
+        }
+        all_places = {}
 
-    for category, file_name in file_paths.items():
-        try:
-            # 修正: 從 GCS Blob 讀取檔案
-            blob = bucket.blob(file_name)
-            data = blob.download_as_bytes()
-            all_places[category] = json.loads(data)
-        except Exception as e:
-            print(f"❌ 讀取 {category} 失敗：{e}")
-            all_places[category] = []
-            
+        for category, file_name in file_paths.items():
+            try:
+                blob = bucket.blob(file_name)
+                data = blob.download_as_bytes()
+                all_places[category] = json.loads(data)
+            except Exception as e:
+                print(f"❌ 讀取 {category} 失敗：{e}")
+                all_places[category] = []
+    except Exception as e:
+        print(f"❌ 初始化 GCS 客戶端失敗：{e}")
+        all_places = {
+            "咖啡廳": [],
+            "伴手禮": [],
+            "溫泉": [],
+            "加油站": []
+        }
     return all_places
 
 def find_nearest_by_category(user_lat, user_lon):
-    # 這裡的程式碼沒有問題，會使用 load_all_places() 載入資料
     all_places = load_all_places()
     result = {}
 
@@ -64,10 +70,9 @@ def find_nearest_by_category(user_lat, user_lon):
                 distances.append({
                     "名稱": name,
                     "距離(km)": dist,
-                    "地址":address,
-                    "網址":googlemap
+                    "地址": address,
+                    "網址": googlemap
                 })
-            
             except:
                 continue
         
@@ -75,19 +80,20 @@ def find_nearest_by_category(user_lat, user_lon):
         result[category] = top3
     return result
 
+# -------------------------------------------------------
+
 @app.route('/api/location', methods=['POST'])
 def receive_location():
     data = request.get_json()
     lat = data.get('lat')
     lng = data.get('lng')
     print(f"收到經緯度: {lat}, {lng}")
-
     nearest = find_nearest_by_category(lat, lng)
     return jsonify(nearest)
 
 @app.route('/')
 def serve_index():
-    return render_template('index.html') # 假設你的 HTML 檔案叫做 index.html
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
