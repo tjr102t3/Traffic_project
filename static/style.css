@@ -198,14 +198,14 @@ body {
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
-.icon_item[data-list="list1"] { background-image: url("https://storage.googleapis.com/trafficwebdemo-data/icon/coffee_gray.svg"); }
-.icon_item[data-list="list2"] { background-image: url("https://storage.googleapis.com/trafficwebdemo-data/icon/souvenirs_gray.svg"); }
-.icon_item[data-list="list3"] { background-image: url("https://storage.googleapis.com/trafficwebdemo-data/icon/hotspring_gray.svg"); }
-.icon_item[data-list="list4"] { background-image: url("https://storage.googleapis.com/trafficwebdemo-data/icon/gas_gray.svg"); }
-.icon_item[data-list="list1"]:hover, .icon_item[data-list="list1"].active { background-image: url('https://storage.googleapis.com/trafficwebdemo-data/icon/coffee_color.svg'); }
-.icon_item[data-list="list2"]:hover, .icon_item[data-list="list2"].active { background-image: url('https://storage.googleapis.com/trafficwebdemo-data/icon/souvenirs_color.svg'); }
-.icon_item[data-list="list3"]:hover, .icon_item[data-list="list3"].active { background-image: url('https://storage.googleapis.com/trafficwebdemo-data/icon/hotspring_color.svg'); }
-.icon_item[data-list="list4"]:hover, .icon_item[data-list="list4"].active { background-image: url('https://storage.googleapis.com/trafficwebdemo-data/icon/gas_color.svg'); }
+.icon_item[data-list="list1"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/coffee_gray.svg"); }
+.icon_item[data-list="list2"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/souvenirs_gray.svg"); }
+.icon_item[data-list="list3"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/hotspring_gray.svg"); }
+.icon_item[data-list="list4"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/gas_gray.svg"); }
+.icon_item[data-list="list1"]:hover, .icon_item[data-list="list1"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/coffee_color.svg'); }
+.icon_item[data-list="list2"]:hover, .icon_item[data-list="list2"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/souvenirs_color.svg'); }
+.icon_item[data-list="list3"]:hover, .icon_item[data-list="list3"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/hotspring_color.svg'); }
+.icon_item[data-list="list4"]:hover, .icon_item[data-list="list4"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/gas_color.svg'); }
 .attractions .icon_group .icon_item.active {
     border-color: #5d66a6;
     box-shadow: 0 0 10px #5d66a6;
