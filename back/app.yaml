@@ -1,0 +1,10 @@
+runtime: python3
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+service: api
+
+# instance_class: F1  # 彈性環境不支援 instance_class，請移除此行或註解掉
+
+env_variables:
+  MONGO_URI: "mongodb://10.140.0.2:27017/"
+  DB_NAME: "traffic_predictions"

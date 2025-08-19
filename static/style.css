@@ -1,0 +1,398 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    width: 1024px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+}
+.title p {
+    background: #5d66a6;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    padding: 15px 10px; /* 增加左右內距 */
+    font-size: 20px;
+}
+.title p b {
+    font-size: 40px;
+}
+/* --------------------跑馬燈--------------------------- */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    letter-spacing: 5px;
+    color: #5d66a6;
+    font-size: 20px;
+}
+.marquee-content,
+.marquee-content2,
+.marquee-content3 {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+/* ----------------------------------------------- */
+.predict_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #eff0f4;
+}
+.predict_item {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+.predict_item p {
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+.predict_group .prediction-btn {
+    background: #fff;
+    color: #000;
+    height: 50px;
+    width: 110px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.btn-primary {
+    background-color: #5d66a6;
+    border: #5d66a6;
+    margin-top: 0;
+}
+.predict_group .btn {
+    width: 100px;
+    height: 50px;
+}
+/* --------------------------------- */
+.road-status {
+    width: 80%;
+    margin-top: 40px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+}
+.status-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.station-id {
+    position: absolute;
+    bottom: -25px;
+    font-size: 20px;
+    width: 40px;
+    line-height: 1px;
+    text-align: center; /* 確保文字置中 */
+}
+.dot {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #5d66a6;
+    background-color: #fff;
+    border-radius: 50%;
+    z-index: 10;
+}
+.status-bar {
+    height: 6px;
+    flex-grow: 1;
+    background-color: #000;
+}
+.PinglineToToucheng.red, .TouchengToNangang.red { background-color: #ff0000; }
+.PinglineToToucheng.orange, .TouchengToNangang.orange { background-color: #ffa500; }
+.PinglineToToucheng.green, .TouchengToNangang.green { background-color: #008000; }
+/* --------------------------------------------- */
+.legend {
+    width: 80%;
+    text-align: left;
+    margin: 15px 0;
+    margin-top: 60px;
+    line-height: 1.5;
+}
+.legend p {
+    margin: 0;
+    color: #000;
+    font-size: 16px;
+}
+.legend .red-line, .orange-line, .green-line {
+    display: inline-block;
+    width: 40px;
+    height: 5px;
+    border-radius: 0%;
+    margin-right: 5px;
+}
+.line-red-color { background-color: red; }
+.line-orange-color { background-color: orange; }
+.line-grenn-color { background-color: green; }
+/* -------------------------------------------------------------- */
+.line-slogan {
+    margin-top: 30px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.line-slogan .line {
+    display: inline-block;
+    flex-grow: 1;
+    border-top: 2px solid #5d66a6;
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+.line-slogan .line:nth-of-type(2) {
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
+    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
+}
+.line-slogan .text {
+    color: #5d66a6;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: inline-block;
+    height: 23px;
+}
+/* -------------------------------------------------------------- */
+.attractions {
+    margin-top: 20px;
+}
+.attractions .icon_group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.attractions .icon_group .icon_item {
+    border: 2px solid #5d66a6;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px 50px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.icon_item[data-list="list1"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/coffee_gray.svg"); }
+.icon_item[data-list="list2"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/souvenirs_gray.svg"); }
+.icon_item[data-list="list3"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/hotspring_gray.svg"); }
+.icon_item[data-list="list4"] { background-image: url("https://storage.googleapis.com/traffic-web-data/icon/gas_gray.svg"); }
+.icon_item[data-list="list1"]:hover, .icon_item[data-list="list1"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/coffee_color.svg'); }
+.icon_item[data-list="list2"]:hover, .icon_item[data-list="list2"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/souvenirs_color.svg'); }
+.icon_item[data-list="list3"]:hover, .icon_item[data-list="list3"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/hotspring_color.svg'); }
+.icon_item[data-list="list4"]:hover, .icon_item[data-list="list4"].active { background-image: url('https://storage.googleapis.com/traffic-web-data/icon/gas_color.svg'); }
+.attractions .icon_group .icon_item.active {
+    border-color: #5d66a6;
+    box-shadow: 0 0 10px #5d66a6;
+}
+.attractions_list {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px auto;
+}
+.attractions_list .list-group-item {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    min-width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 30px;
+}
+.attractions_list .list-group-item a {
+    margin-left: 50px;
+    font-size: 20px;
+}
+/* 警示窗 存取user位置 */
+#locationModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+}
+button {
+    padding: 8px 16px;
+    margin-top: 10px;
+}
+
+/* -------------------------------------------------- */
+/* ----------- RWD 響應式設計調整 (Media Queries) ----------- */
+/* -------------------------------------------------- */
+
+/* 適用於螢幕寬度小於 1024px (平板、手機) */
+@media (max-width: 1023.98px) {
+    .container {
+        width: 100%; /* 讓容器佔滿整個螢幕寬度 */
+        margin-top: 20px; /* 調整上邊距 */
+        padding: 0 15px; /* 增加左右內距，避免內容貼邊 */
+        box-sizing: border-box; /* 確保 padding 不會超出 width */
+    }
+    .title p b {
+        font-size: 30px; /* 縮小主要標題字體 */
+    }
+    .title p {
+        font-size: 16px; /* 縮小副標題字體 */
+    }
+    .predict_item {
+        width: 90%; /* 在小螢幕上佔用更多寬度 */
+        flex-direction: column; /* 垂直排列項目 */
+        align-items: center; /* 內容置中 */
+        margin-top: 50px; /* 調整上邊距 */
+    }
+    .predict_item p, .predict_group .prediction-btn, .predict_group .btn {
+        width: 100%; /* 讓選擇器和按鈕佔滿寬度 */
+        margin-top: 10px; /* 增加項目間距 */
+        text-align: center; /* 文字置中 */
+        font-size: 16px; /* 縮小字體 */
+    }
+    .road-status {
+        width: 90%; /* 在小螢幕上佔用更多寬度 */
+        margin-top: 30px;
+    }
+    .station-id {
+        font-size: 14px; /* 縮小站點名稱字體 */
+        bottom: -20px;
+    }
+    .dot {
+        width: 20px; /* 縮小圓點大小 */
+        height: 20px;
+        border: 4px solid #5d66a6;
+    }
+    .legend {
+        width: 90%;
+        margin-top: 40px;
+    }
+    .legend p {
+        font-size: 14px;
+    }
+    .line-slogan .text {
+        font-size: 18px; /* 縮小周圍景點標題字體 */
+    }
+    .attractions .icon_group {
+        width: 90%;
+        flex-wrap: wrap; /* 讓圖標可以在必要時換行 */
+        gap: 10px; /* 增加圖標之間的間距 */
+        justify-content: center; /* 圖標置中 */
+    }
+    .attractions .icon_group .icon_item {
+        width: 60px; /* 縮小圖標大小 */
+        height: 60px;
+        background-size: 30px 30px;
+    }
+    .attractions_list .list-group-item {
+        min-width: auto; /* 移除最小寬度限制 */
+        width: 90%; /* 讓列表項目佔滿寬度 */
+        font-size: 18px; /* 縮小列表字體 */
+        padding: 10px 15px; /* 調整內距 */
+    }
+    .attractions_list .list-group-item a {
+        font-size: 14px; /* 縮小地址連結字體 */
+        margin-left: 20px; /* 調整連結間距 */
+    }
+}
+
+/* 適用於螢幕寬度小於 576px (更小的手機) */
+/* 適用於螢幕寬度小於 576px (更小的手機) */
+@media (max-width: 575.98px) {
+    .title p b {
+        font-size: 24px;
+    }
+    .title p {
+        font-size: 14px;
+    }
+    .marquee-container {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+    .predict_group {
+        padding-bottom: 20px;
+    }
+    .predict_item {
+        margin-top: 30px;
+    }
+    .predict_item p, .predict_group .prediction-btn, .predict_group .btn {
+        font-size: 14px;
+    }
+    .road-status {
+        width: 95%;
+    }
+    .station-id {
+        font-size: 12px;
+        width: auto;
+    }
+    .legend {
+        margin-top: 30px;
+    }
+    .attractions .icon_group {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .attractions .icon_group .icon_item {
+        width: 50px;
+        height: 50px;
+        background-size: 25px 25px;
+    }
+    .line-slogan .text {
+        font-size: 16px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* 針對手機版列表項目進行調整 */
+    .attractions_list .list-group-item {
+        flex-direction: column; /* 將項目從水平排列改為垂直排列 */
+        align-items: flex-start; /* 讓內容靠左對齊 */
+        text-align: left;
+        min-width: 90%; /* 確保列表項目能佔用大部分寬度 */
+        width: 90%;
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    .attractions_list .list-group-item a {
+        margin-left: 0; /* 移除左邊距 */
+        font-size: 14px;
+        margin-top: 5px; /* 增加與上方內容的間距 */
+        display: block; /* 讓連結獨佔一行 */
+    }
+}
