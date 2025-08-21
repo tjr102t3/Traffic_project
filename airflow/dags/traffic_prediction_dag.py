@@ -13,7 +13,7 @@ from pymongo import MongoClient
 # === 模型與 BigQuery 參數設定 ===
 # ====================================================================
 
-PROJECT_ID = "tjr102-traffic-project"
+PROJECT_ID = "test123-467809"
 DATASET_ID = "bigquery"
 
 TABLE_MAPPING = {
