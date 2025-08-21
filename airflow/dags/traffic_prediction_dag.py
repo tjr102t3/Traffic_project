@@ -60,14 +60,37 @@ def run_all_predictions(**kwargs):
     print("模型預測 DAG 已被觸發，開始執行預測任務。")
     client_bq = bigquery.Client(project=PROJECT_ID)
     
-    # === 新增：連接 MongoDB ===
+    # === 連接 MongoDB ===
+    # === 修改：連接 MongoDB，從環境變數讀取憑證 ===
     try:
-        mongo_client = MongoClient('mongodb', 27017)
-        db = mongo_client['traffic_predictions']
+        # 從環境變數中獲取 MongoDB 的使用者名稱和密碼
+        mongo_user = os.getenv('MONGO_USER')
+        mongo_password = os.getenv('MONGO_PASSWORD')
+        
+        # 檢查是否成功讀取到環境變數
+        if not mongo_user or not mongo_password:
+            raise ValueError("MongoDB 使用者名稱或密碼環境變數未設定。")
+
+        # 使用獲取到的憑證來建立 MongoDB 連線字串
+        # 這裡的 'mongodb' 是 docker-compose 內部網路的服務名稱
+        mongo_uri = f"mongodb://{mongo_user}:{mongo_password}@mongodb:27017/traffic_predictions?authSource=admin"
+        mongo_client = MongoClient(mongo_uri)
+        
+        # 嘗試連接以驗證憑證
+        # db = mongo_client['traffic_predictions'] # 這行可以保留，或者在後續操作時才指定資料庫
+        db = mongo_client.get_database('traffic_predictions')
+        
+        # 執行一個簡單的命令來驗證認證是否成功 (例如：列出集合)
+        db.list_collection_names() 
+        
         print("成功連接到 MongoDB。")
     except Exception as e:
         print(f"連接 MongoDB 失敗：{e}")
-        raise
+        print("請確認以下事項：")
+        print("1. Airflow 容器的環境變數 MONGO_USER 和 MONGO_PASSWORD 是否正確設定。")
+        print("2. MongoDB 容器是否已啟動並啟用認證。")
+        print("3. 您在 MongoDB 中是否已為 'airflow_user' 建立正確的角色和密碼。")
+        raise # 重新拋出例外，讓 Airflow 任務失敗
     
     # 載入模型
     if not os.path.exists(MODEL_SAVE_PATH):
