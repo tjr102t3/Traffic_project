@@ -17,6 +17,7 @@ services:
       - PYTHONPATH=/opt/airflow
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - AIRFLOW_EXTRA_PIP_PACKAGES=apache-airflow-providers-mongo
     depends_on:
       - mongodb
     command: airflow standalone
