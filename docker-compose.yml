@@ -13,11 +13,13 @@ services:
       - ./airflow/data_clean:/opt/airflow/data_clean
       # 根目錄下的 'lstm_model' 子目錄
       - ./lstm_model:/opt/airflow/lstm_model
+      - ./gcp-key.json:/opt/airflow/gcp-key.json
     environment:
       - PYTHONPATH=/opt/airflow
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - AIRFLOW_EXTRA_PIP_PACKAGES=apache-airflow-providers-mongo
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/gcp-key.json
     depends_on:
       - mongodb
     command: airflow standalone
