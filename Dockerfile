@@ -6,7 +6,7 @@ FROM apache/airflow:2.11.0-python3.12
 USER airflow
 
 # 使用 pip 安裝 PyMongo (MongoDB 的 Python 驅動程式)
-RUN pip install "pymongo==4.7.3"
+RUN pip install "pymongo==4.7.3" "apache-airflow-providers-mongo"
 
 # 使用 pip 安裝 PyTorch
 RUN pip install "torch==2.3.1"
