@@ -4,7 +4,7 @@
 
 // Flask 後端服務的基礎 URL
 // VM 外部 IP
-const API_BASE_URL = 'https://api-service-127768281696.asia-east2.run.app';
+const API_BASE_URL = 'https://traffic-api-127768281696.asia-east1.run.app/';
 
 // 獲取路段的 DOM 元素，這些元素將會根據 API 數據更新顏色
 const roadSegment1 = document.getElementById('road-segment-1');

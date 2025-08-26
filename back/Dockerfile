@@ -12,8 +12,6 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # 設定環境變數
-ENV MONGO_URI="mongodb://10.140.0.2:27017/"
-ENV DB_NAME="traffic_predictions"
 ENV PORT=8080
 
 # 應用程式在容器內運行的指令

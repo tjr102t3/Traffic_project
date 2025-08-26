@@ -6,5 +6,7 @@ service: api
 # instance_class: F1  # 彈性環境不支援 instance_class，請移除此行或註解掉
 
 env_variables:
-  MONGO_URI: "mongodb://10.140.0.2:27017/"
-  DB_NAME: "traffic_predictions"
+  MONGO_USER: "tjr102g3"
+  MONGO_HOST: "10.140.0.2:27017"
+  MONGO_DB_NAME: "traffic_predictions"
+  MONGO_AUTH_SOURCE: "admin"
