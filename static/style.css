@@ -293,6 +293,8 @@ button {
     .station-id {
         font-size: 14px; /* 縮小站點名稱字體 */
         bottom: -20px;
+  
+
     }
     .dot {
         width: 20px; /* 縮小圓點大小 */
@@ -359,7 +361,8 @@ button {
     }
     .station-id {
         font-size: 12px;
-        width: auto;
+        /* width: auto; */
+        /* word-wrap:break-all; */
     }
     .legend {
         margin-top: 30px;

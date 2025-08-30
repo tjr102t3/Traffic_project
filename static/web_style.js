@@ -1,7 +1,7 @@
 // 頁面載入後立即執行一次，顯示初始路況
-document.addEventListener('DOMContentLoaded', () => {
-    updateTrafficStatusFromApi();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     updateTrafficStatusFromApi();
+// });
 
 // 切換icon
 const icons = document.querySelectorAll('.attractions .icon_item');

@@ -59,6 +59,7 @@ function updateRoadSegment(roadSegments, speed, classNamePrefix, gantryId) {
 // ====================================================================
 
 async function updateTrafficStatusFromApi() {
+    
     console.log("正在從後端 API 獲取最新的交通數據...");
 
     // 將所有門架的配置儲存在一個陣列中，便於擴展和管理
@@ -105,15 +106,15 @@ async function updateTrafficStatusFromApi() {
 
 // 首次載入頁面時執行，並每隔 15 秒重新獲取一次數據
 // 💡 請根據你的需求調整時間間隔 (單位: 毫秒)
-document.addEventListener('DOMContentLoaded', () => {
-    updateTrafficStatusFromApi();
-    setInterval(updateTrafficStatusFromApi, 15000); 
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     updateTrafficStatusFromApi();
+//     setInterval(updateTrafficStatusFromApi, 15000); 
+// });
 
 // 按下才更新
 document.addEventListener('DOMContentLoaded', () => {
     // 頁面載入時首次執行一次
-    updateTrafficStatusFromApi();
+    // updateTrafficStatusFromApi();
 
     // 監聽按鈕點擊事件
     if (updateBtn) {
